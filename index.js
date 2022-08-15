@@ -8,6 +8,7 @@
  * 
  * @param {Array or Object} collection: The collection over which to iterate.
  * @param {Function} action: The Function to be applied to each value in the 
+ * //@return  */
  * collection
  */
 function each(collection, action) {
@@ -22,3 +23,4 @@ function each(collection, action) {
     }
 }
 module.exports.each = each;
+
