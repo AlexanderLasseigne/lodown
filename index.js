@@ -100,3 +100,27 @@ module.exports.first = first;
     }
 }
 module.exports.last = last;
+
+/**
+ * indexOf: Tests if a given value 'val' exists in given array 'arr'
+ * -and returns the index number of the match in 'arr' to 'val.
+ * -if not return -1
+ * 
+ * @param {Array} arr: The given array to check for instances of given value in.
+ * @param {value} val: given value to check given array for
+ * @return {number} :IF value exists in given array return it's index value.
+ * Otherwise return -1
+ */
+
+
+
+function indexOf(arr, val){
+    var output;
+    for (let i = 0; i < arr.length; i++){
+        if (val === arr[i]){
+            return i;
+        }       
+    }
+    return -1;
+}
+module.exports.indexOf = indexOf; 
