@@ -7,9 +7,9 @@
  * action Function to each value in the collection.
  * 
  * @param {Array or Object} collection: The collection over which to iterate.
- * @param {Function} action: The Function to be applied to each value in the 
- * //@return  */
- * collection
+ * @param {Function} action: The Function to be applied to each value in the collection
+ * @return  
+ * 
  */
 function each(collection, action) {
     if(Array.isArray(collection)) {
