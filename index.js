@@ -264,5 +264,132 @@ module.exports.map = map;
 module.exports.pluck = pluck;
 
 /**
- * 
+ * every: used to return the each element of the given list. 
+ * @param {object or array} collection: a list
+ * @param {function} func: executed on each element of list 
+ * @return {any value} :each element of the collection
  */
+ function every(collection, func){
+   
+    // determine if 'collection' is an ARRAY
+    if (Array.isArray(collection)){
+        // IF 'collectin' is an ARRAY then begin to iterate to have access
+        // to every ELLEMENT in the ARRAY
+        for (let i = 0; i < collection.length; i++){
+            if (typeof func === 'function'){
+            // determine if the current element in colleciton is falsy with func            
+                if (!func(collection[i], i, collection)){
+                    return false; 
+                } 
+            } else {
+                    if (!collection[i]){
+                        return false;
+                    } 
+                } 
+        }    
+        // Test to verify collection is an object
+    }   else if (typeof collection === 'object' && collection !== null){  // test if collection is an object
+            // Begin FOR IN LOOP to access every key in object 'collection'
+            for (let key in collection){
+                //test if function exists
+                if (typeof func === 'function'){
+                    if (!func(collection[key], key, collection)){
+                        return false; // incriment our countA by one if ELEMENT in ARRAY is TRUTHY.
+                    } 
+                } else {
+                    if (!collection[key]){
+                        return false;
+                    } 
+                  }
+            }
+        }
+return true; 
+}
+module.exports.every = every;
+
+/**
+ * some: Returns true if any of the values in the list pass the 
+ * given functions test. returns true and stops iterating the list 
+ * if a true element is found. false if nothing true.
+ * @param {object or array} collection: given thing
+ * @param {function} func: tests each element in colleciton 
+ * @return {boolean} true if all tests pass. false if one fail
+ */
+ function some(collection, func){
+    if (Array.isArray(collection)){
+        // IF 'collectin' is an ARRAY then begin to iterate to have access
+        // to every ELLEMENT in the ARRAY
+        for (let i = 0; i < collection.length; i++){
+            if (typeof func === 'function'){
+            // determine if the current element in colleciton is true with func            
+                if (func(collection[i], i, collection)){
+                    return true; 
+                } 
+            } else {
+                    if (collection[i]){
+                        return true;
+                    } 
+                } 
+        }    
+        // Test to verify collection is an object
+    }   else if (typeof collection === 'object' && collection !== null){  // test if collection is an object
+            // Begin FOR IN LOOP to access every key in object 'collection'
+            for (let key in collection){
+                //test if function exists
+                if (typeof func === 'function'){
+                    if (!func(collection[key], key, collection)){
+                        return true; // 
+                    } 
+                } else {
+                    if (!collection[key]){
+                        return true;
+                    } 
+                  }
+            }
+        }
+    return false;
+}
+ module.exports.some = some;
+
+ /**
+  * reduce:  reduce boils down a list of values into a single value,
+  * It passes each element in passed in list to func which does an
+  * accumulation process of what func specifies.
+  * @param {array} array: list given
+  * @param {function} func: does some process to combine all elements into one
+  * @param {value} seed: a starting point for the accumulator that is combining
+  * or changing the values
+  * @return {value} acc: accumulated or combined items
+  */
+  function reduce(array, func, seed){
+    // declare var acc as accumulator/ return value
+    var acc;
+    //test for seed presence
+    if (seed !== undefined){
+        acc = seed; //IF present/ acc shall equal seed
+     // begin iterating array  
+    for (let i = 0; i < array.length; i++){
+        // assign or reassign accumulator variable to passed in function func
+        acc = func(acc, array[i], i);
+        }
+    } else {
+        acc = array[0]; //IF seed NOT present/ acc shall equal 1st element||value in array
+        //iterate
+        for (let i = 1; i < array.length; i++, array){ //Direction didn't mention a 4th parameter of the array in Objectives: 1)
+            // assign or reassign accumulator variable to passed in function func
+            acc = func(acc, array[i], i, array);
+            }  
+        } 
+    return acc;
+}
+module.exports.reduce = reduce;
+
+/**
+ * extend: 
+ * @param
+ * @return
+ */
+ function extend(destin, ...obs){
+    return Object.assign(destin, ...obs)
+ }
+ module.exports.extend = extend;
