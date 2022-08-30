@@ -8,7 +8,7 @@
  * 
  * @param {Array or Object} collection: The collection over which to iterate.
  * @param {Function} action: The Function to be applied to each value in the collection
- * @return  
+ *   
  * 
  */
 function each(collection, action) {
@@ -28,7 +28,7 @@ module.exports.each = each;
  * identity: Function takes in any input and returns that input unchanged.
  * 
  * @param {Any value} value: Function takes in any input value.
- * @returns {Any value} value: Function
+ * @returns {Any value} value: Function returns input value unchanged. 
  */
 function identity(value){
     return value;
@@ -39,7 +39,7 @@ module.exports.identity = identity;
  * typeOf: takes in any value and returns the type
  * 
  * @param {Any value} value: Takes in any input value.
- * @returns {A string} :type of datatype returned as a 
+ * @returns {A string} :type of datatype returned as a string
  */
 function typeOf(value){ 
     if (typeof value === 'string'){
@@ -124,3 +124,111 @@ function indexOf(arr, val){
     return -1;
 }
 module.exports.indexOf = indexOf; 
+
+/**
+ * contains: Takes in list and a value. 
+ * Returns true or false base on if the value is present in the list.
+ * 
+ * @param {array} arr: the input list
+ * @param {value} value: input value to check list for.
+ * @return {boolean}: true or false.
+ */
+
+ function contains(arr, value){
+    return (_.indexOf(arr, value) !== -1) 
+        ? true
+        : false;
+}
+module.exports.contains = contains; 
+
+/**
+ * unique: Returns a new array with all duplicates removed.
+ * 
+ * @param {array} arr: passed in to have duplicates removed.
+ * @return {array} narr: the new array with duplicates of arr removed.
+ */
+
+function unique(arr){
+    var narr = []; 
+    for (let i = 0; i < arr.length; i++){ 
+        if (_.indexOf(narr, arr[i]) === -1){
+            narr.push(arr[i]);
+        }
+    }
+    return narr; //returns narr
+}
+module.exports.unique = unique;
+
+/**
+ * filter: each element in array is passed through given function.
+ * It will form a new array of all those elements which satisfy the 
+ * condition passed from the array. 
+ * 
+ * @param {array} arr: array to have every element inspected to pass function
+ * @param {function} func: given function to test each element against and
+ * return a new array of elements which pass.
+ * @return {array} narr: the new array of only the elements which passd 
+ * the condition of function func
+ */
+
+ function filter(arr, func){
+    let narr = [];
+    for (let i = 0; i < arr.length; i++){
+        if (func(arr[i], i, arr)){
+            narr.push(arr[i]);
+        }               
+    }
+    return narr;
+}
+module.exports.filter = filter;
+
+/**
+ * reject: each element in array is passed through given function.
+ * It will form a new array of all those elements which DO NOT satisfy the 
+ * condition passed from the array. 
+ * 
+ * @param {array} arr: array to have every element inspected passed in function
+ * @param {function} func: given function to test each element against and
+ * return a new array of elements which fail.
+ * @return {array} narr: the new array of only the elements which failed 
+ * the condition of function func
+ */
+
+ function reject(arr, func){
+    let narr = [];
+    for (let i = 0; i < arr.length; i++){
+        if (!func(arr[i], i, arr)){
+            narr.push(arr[i]);
+        }
+    }
+    return narr;
+}
+module.exports.reject = reject;
+
+/**
+ * partition: each element in array is passed through given function.
+ * all elements which pass condition of function get pushed into a 
+ * truthy array and those that fail pushed into falsy array then 
+ * both those arrays are pused into a new array which is returned.
+ * @param {array} arr: array to have every element inspected passed in function
+ * @param {function} func: given function to test each element against
+ * @return {array} output: an array containing an array of passed elements and 
+ * an array of elements which did NOT pass function.  
+ */
+
+ function partition(arr, func){ 
+    var output = []; 
+    var arrT = []; 
+    var arrF = []; 
+    for (let i = 0; i <  arr.length; i++){
+       if (func(arr[i], i, arr)){
+          arrT.push(arr[i]); 
+        } else {
+            arrF.push(arr[i])
+          }         
+    }
+    output.push(arrT, arrF);
+    return output;
+}
+module.exports.partition = partition;
+
