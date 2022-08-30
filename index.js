@@ -385,9 +385,13 @@ module.exports.every = every;
 module.exports.reduce = reduce;
 
 /**
- * extend: 
- * @param
- * @return
+ * extend: takes in an OBJECT and another 1 or more OBJECTS and 
+ * Shallowly copy all of the properties in the source objects over 
+ * to the destination object, and return the destination object. 
+ * Any nested objects or arrays will be copied too
+ * @param {object} destin: destination object 
+ * @param {objects} obs: 1 or more objects to have all properties copied from. 
+ * @return {object} destin: destination object with additional properties
  */
  function extend(destin, ...obs){
     return Object.assign(destin, ...obs)
