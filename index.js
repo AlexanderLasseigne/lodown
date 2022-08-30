@@ -111,9 +111,6 @@ module.exports.last = last;
  * @return {number} :IF value exists in given array return it's index value.
  * Otherwise return -1
  */
-
-
-
 function indexOf(arr, val){
     var output;
     for (let i = 0; i < arr.length; i++){
@@ -133,7 +130,6 @@ module.exports.indexOf = indexOf;
  * @param {value} value: input value to check list for.
  * @return {boolean}: true or false.
  */
-
  function contains(arr, value){
     return (_.indexOf(arr, value) !== -1) 
         ? true
@@ -147,7 +143,6 @@ module.exports.contains = contains;
  * @param {array} arr: passed in to have duplicates removed.
  * @return {array} narr: the new array with duplicates of arr removed.
  */
-
 function unique(arr){
     var narr = []; 
     for (let i = 0; i < arr.length; i++){ 
@@ -170,7 +165,6 @@ module.exports.unique = unique;
  * @return {array} narr: the new array of only the elements which passd 
  * the condition of function func
  */
-
  function filter(arr, func){
     let narr = [];
     for (let i = 0; i < arr.length; i++){
@@ -193,7 +187,6 @@ module.exports.filter = filter;
  * @return {array} narr: the new array of only the elements which failed 
  * the condition of function func
  */
-
  function reject(arr, func){
     let narr = [];
     for (let i = 0; i < arr.length; i++){
@@ -215,7 +208,6 @@ module.exports.reject = reject;
  * @return {array} output: an array containing an array of passed elements and 
  * an array of elements which did NOT pass function.  
  */
-
  function partition(arr, func){ 
     var output = []; 
     var arrT = []; 
@@ -232,3 +224,45 @@ module.exports.reject = reject;
 }
 module.exports.partition = partition;
 
+/**
+ * map: Produces a new array of values by mapping each value in a collection through 
+ * a transformation function (func) that is passed three 
+ * arguments: the value, then the index (or key) of the iteration, and finally 
+ * a reference to the entire list.
+ * @param {array or object} coll: list which contains some elements
+ * @param {function} func: transformative function executed on every 
+ * element of the list. func takes parameters of element, index or key, 
+ * and the collection or list.
+ * @return {array} output: new array of values decided by func
+ */
+ function map(coll, func){
+    var output = [];
+    if (_.typeOf(coll) === 'array'){
+        for (let i = 0; i < coll.length; i++){
+        output.push(func(coll[i], i, coll));
+        }
+    } else {_.typeOf(coll) === 'object'  
+        for (let key in coll){
+            output.push(func(coll[key], key, coll))
+        }
+      }
+    return output; 
+}
+module.exports.map = map;
+
+/**
+ * pluck: returns new array of values of a given property.
+ * @param {array} arrObj: list
+ * @param {property} prop: property name
+ * @return {array} :of property values specified with prop 
+ */
+ function pluck(arrObj, prop){
+    return _.map(arrObj, function(e){ 
+        return e[prop]; 
+    })     
+}
+module.exports.pluck = pluck;
+
+/**
+ * 
+ */
